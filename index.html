@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en" class="antialiased">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SkyMetric — Drone-Based Engineering Survey Subscriptions</title>
+    <meta name="description" content="SkyMetric: Fast, accurate drone surveys with web dashboard access. Subscription plans for engineering & construction teams." />
+    <meta name="theme-color" content="#0f172a" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Extra small design touches beyond Tailwind defaults */
+        .glass {
+            backdrop-filter: blur(6px);
+            background: rgba(15,23,42,0.55);
+        }
+
+        .accent {
+            background: linear-gradient(90deg,#06b6d4,#7c3aed);
+        }
+
+        /* Make all in-page navigation smooth (anchors, location.hash, programmatic jumps) */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100">
+    <!-- NAV -->
+    <header class="max-w-7xl mx-auto p-6 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg accent flex items-center justify-center shadow-lg">SM</div>
+            <div>
+                <h1 class="font-bold">SkyMetric</h1>
+                <p class="text-xs text-slate-300 -mt-0.5">Drone surveys · Engineering data platform</p>
+            </div>
+        </div>
+        <nav class="hidden md:flex items-center gap-6 text-slate-300">
+            <a href="#features" class="hover:text-white">Features</a>
+            <a href="#pricing" class="hover:text-white">Pricing</a>
+            <a href="#how" class="hover:text-white">How it works</a>
+            <a href="#contact" class="hover:text-white">Contact</a>
+            <button id="openSignup" class="ml-4 px-4 py-2 rounded-lg bg-cyan-500 text-slate-900 font-semibold">Get Started</button>
+        </nav>
+
+        <!-- mobile menu -->
+        <div class="md:hidden flex items-center gap-3">
+            <button id="openSignupMobile" class="px-3 py-2 rounded bg-cyan-500 text-slate-900">Start</button>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <main class="max-w-6xl mx-auto px-6">
+        <section class="grid md:grid-cols-2 gap-8 items-center py-12">
+            <div>
+                <h2 class="text-4xl md:text-5xl font-extrabold leading-tight">Engineering-grade drone surveys, delivered on-demand.</h2>
+                <p class="mt-4 text-slate-300 max-w-xl">SkyMetric combines RTK drone capture, LiDAR/photogrammetry processing and a web dashboard so engineering teams can access accurate 2D/3D deliverables, volume reports, and CAD-ready exports — all on a subscription plan.</p>
+
+                <div class="mt-6 flex flex-wrap gap-3">
+                    <button id="ctaPricing" class="px-5 py-3 rounded-lg bg-gradient-to-r from-cyan-400 to-indigo-600 text-slate-900 font-semibold">View Plans</button>
+                    <button id="ctaDemo" class="px-5 py-3 rounded-lg border border-slate-700 text-slate-200">Request Demo</button>
+                </div>
+
+                <ul class="mt-8 grid grid-cols-2 gap-3 text-slate-300 text-sm max-w-md">
+                    <li>✅ RTK drone accuracy (±2 cm)</li>
+                    <li>✅ CAD/GIS exports (AutoCAD, Revit, QGIS)</li>
+                    <li>✅ Automated volume & cut-fill reports</li>
+                    <li>✅ Priority scheduling for pro plans</li>
+                </ul>
+            </div>
+
+            <div class="rounded-lg overflow-hidden shadow-2xl">
+                <div class="bg-slate-800 p-6">
+                    <div class="h-64 rounded-md bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-slate-400"></div>
+                    <div class="mt-4 grid grid-cols-3 gap-3 text-xs text-slate-300">
+                        <div class="p-3 glass rounded">Orthomosaic</div>
+                        <div class="p-3 glass rounded">DSM/DEM</div>
+                        <div class="p-3 glass rounded">Cut/Fill</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section id="features" class="py-12">
+            <h3 class="text-2xl font-bold">Platform highlights</h3>
+            <div class="mt-6 grid md:grid-cols-3 gap-6">
+                <article class="p-6 rounded-lg glass">
+                    <h4 class="font-semibold">On-demand surveys</h4>
+                    <p class="text-sm text-slate-300 mt-2">Book surveys online, track pilot dispatch and get results directly in your dashboard.</p>
+                </article>
+                <article class="p-6 rounded-lg glass">
+                    <h4 class="font-semibold">High-precision deliverables</h4>
+                    <p class="text-sm text-slate-300 mt-2">Orthomosaics, point clouds, DSMs and CAD-ready exports with RTK accuracy.</p>
+                </article>
+                <article class="p-6 rounded-lg glass">
+                    <h4 class="font-semibold">Integrations & APIs</h4>
+                    <p class="text-sm text-slate-300 mt-2">Connect to AutoCAD, Revit, ArcGIS and automate data ingestion with our API.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section id="how" class="py-12">
+            <h3 class="text-2xl font-bold">How it works</h3>
+            <div class="mt-6 grid md:grid-cols-4 gap-4 text-slate-300">
+                <div class="p-4 glass rounded">
+                    <strong>1. Request</strong>
+                    <div class="text-sm mt-2">Create a survey request on the portal with area and deliverables.</div>
+                </div>
+                <div class="p-4 glass rounded">
+                    <strong>2. Fly</strong>
+                    <div class="text-sm mt-2">Local pilot performs RTK/LiDAR flight; data uploaded to cloud.</div>
+                </div>
+                <div class="p-4 glass rounded">
+                    <strong>3. Process</strong>
+                    <div class="text-sm mt-2">Automated photogrammetry/LiDAR processing and AI QA.</div>
+                </div>
+                <div class="p-4 glass rounded">
+                    <strong>4. Deliver</strong>
+                    <div class="text-sm mt-2">Download orthomosaics, contours, point clouds and CAD files from the dashboard.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING -->
+        <section id="pricing" class="py-12">
+            <h3 class="text-2xl font-bold">Subscription plans</h3>
+            <p class="text-slate-400 mt-2">Choose a plan that fits your project's scale. Prices in PHP. Monthly pricing shown — toggle to view yearly.</p>
+
+            <div class="mt-6 flex items-center gap-3">
+                <label class="text-sm text-slate-300">Monthly</label>
+                <input id="billingToggle" type="checkbox" class="toggle-checkbox" />
+                <label class="text-sm text-slate-300">Yearly (save 15%)</label>
+            </div>
+
+            <div class="mt-6 grid md:grid-cols-3 gap-6">
+                <!-- Free/Starter could be added here -->
+                <div class="p-6 rounded-lg glass flex flex-col">
+                    <h4 class="font-semibold">Basic</h4>
+                    <div class="text-slate-400 text-sm mt-2">For small projects and one-off surveys</div>
+                    <div class="mt-6">
+                        <div class="text-3xl font-bold price">₱15,000<span class="text-sm">/mo</span></div>
+                        <ul class="mt-4 text-slate-300 text-sm space-y-2">
+                            <li>• Limited flight hours</li>
+                            <li>• 50 GB storage</li>
+                            <li>• Standard processing</li>
+                            <li>• Email support</li>
+                        </ul>
+                        <button class="mt-6 py-3 px-4 rounded-lg bg-cyan-500 text-slate-900 font-semibold open-sub" data-plan="Basic" data-price="15000">Subscribe</button>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-lg accent text-slate-900 flex flex-col shadow-xl">
+                    <h4 class="font-semibold">Professional</h4>
+                    <div class="text-slate-800 text-sm mt-2">For engineering teams and enterprise workflows</div>
+                    <div class="mt-6">
+                        <div class="text-3xl font-bold price">₱50,000<span class="text-sm">/mo</span></div>
+                        <ul class="mt-4 text-slate-900 text-sm space-y-2">
+                            <li>• Priority scheduling</li>
+                            <li>• Unlimited data access</li>
+                            <li>• API integrations</li>
+                            <li>• Dedicated account manager</li>
+                        </ul>
+                        <button class="mt-6 py-3 px-4 rounded-lg bg-slate-900 text-cyan-400 font-semibold open-sub" data-plan="Professional" data-price="50000">Subscribe</button>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-lg glass flex flex-col">
+                    <h4 class="font-semibold">Enterprise</h4>
+                    <div class="text-slate-400 text-sm mt-2">Custom SLAs, integrations and on-site support</div>
+                    <div class="mt-6">
+                        <div class="text-3xl font-bold">Contact</div>
+                        <ul class="mt-4 text-slate-300 text-sm space-y-2">
+                            <li>• Custom API & data licensing</li>
+                            <li>• Fleet & pilot management</li>
+                            <li>• Onboarding & training</li>
+                        </ul>
+                        <button class="mt-6 py-3 px-4 rounded-lg bg-cyan-500 text-slate-900 font-semibold" onclick="location.href='#contact'">Contact Sales</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ / Trust -->
+        <section class="py-12">
+            <h3 class="text-2xl font-bold">Trusted by engineering teams</h3>
+            <p class="text-slate-400 mt-2 max-w-2xl">Local governments, construction firms, and survey companies rely on SkyMetric for repeatable, auditable survey data.</p>
+
+            <div class="mt-6 grid md:grid-cols-3 gap-4 text-slate-300">
+                <div class="p-4 glass rounded">University of Luzon (Case study)</div>
+                <div class="p-4 glass rounded">Top engineering firm (confidential)</div>
+                <div class="p-4 glass rounded">Regional government projects</div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="py-12">
+            <h3 class="text-2xl font-bold">Contact & Demo</h3>
+            <div class="mt-6 grid md:grid-cols-2 gap-6">
+                <form id="contactForm" class="p-6 rounded-lg glass" novalidate>
+                    <label class="block text-sm text-slate-300">Name</label>
+                    <input id="contactName" name="name" required class="w-full mt-2 p-2 rounded bg-slate-800 text-slate-100" />
+                    <label class="block text-sm text-slate-300 mt-4">Company / Organization</label>
+                    <input id="contactCompany" name="company" class="w-full mt-2 p-2 rounded bg-slate-800 text-slate-100" />
+                    <label class="block text-sm text-slate-300 mt-4">Email</label>
+                    <input id="contactEmail" type="email" name="email" required class="w-full mt-2 p-2 rounded bg-slate-800 text-slate-100" />
+                    <label class="block text-sm text-slate-300 mt-4">Message</label>
+                    <textarea id="contactMessage" name="message" rows="4" class="w-full mt-2 p-2 rounded bg-slate-800 text-slate-100"></textarea>
+
+                    <div class="mt-4 flex gap-3">
+                        <button type="submit" id="contactSendBtn" class="px-4 py-2 rounded bg-cyan-500 text-slate-900 font-semibold">Send</button>
+                        <button type="button" id="demoSendBtn" class="px-4 py-2 rounded border border-slate-600 text-slate-200">Request Demo</button>
+                    </div>
+                </form>
+
+                <div class="p-6 rounded-lg glass">
+                    <h4 class="font-semibold">Office</h4>
+                    <p class="text-slate-300 mt-2">Dagupan City, Philippines</p>
+                    <p class="text-slate-300 mt-2">Email: skymetric001@gmail.com</p>
+                    <p class="text-slate-300 mt-2">Phone: +63 995 139 0922</p>
+
+                    <div class="mt-6">
+                        <strong class="text-sm text-slate-300">Startup funding</strong>
+                        <p class="text-slate-400 text-sm mt-2">Seeking PHP 3M — open to equity or revenue-share terms.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-8 text-slate-400 text-sm text-center">© SkyMetric Technologies, Inc. — Built for engineers. Privacy · Terms</footer>
+    </main>
+
+    <!-- SIGNUP / SUBSCRIPTION MODAL -->
+    <div id="signupModal" class="fixed inset-0 hidden items-center justify-center bg-black/60 p-6 z-50">
+        <div class="w-full max-w-xl bg-slate-800 rounded-lg p-6">
+            <div class="flex items-center justify-between">
+                <h4 class="font-semibold">Subscribe</h4>
+                <button id="closeModal" class="text-slate-400">✕</button>
+            </div>
+            <form id="subscribeForm" class="mt-4 space-y-3">
+                <input type="hidden" name="plan" id="planInput" />
+                <label class="text-sm text-slate-300">Full name</label>
+                <input name="fullname" required class="w-full p-2 rounded bg-slate-900 text-slate-100" />
+                <label class="text-sm text-slate-300">Business email</label>
+                <input type="email" name="email" required class="w-full p-2 rounded bg-slate-900 text-slate-100" />
+                <div class="flex gap-3">
+                    <label class="flex-1">
+                        <div class="text-sm text-slate-300">Company</div>
+                        <input name="company" class="w-full p-2 rounded bg-slate-900 text-slate-100" />
+                    </label>
+                    <label class="w-32">
+                        <div class="text-sm text-slate-300">Phone</div>
+                        <input name="phone" class="w-full p-2 rounded bg-slate-900 text-slate-100" />
+                    </label>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-slate-400">Plan: <span id="planLabel">Basic</span> — <span id="planPrice">₱15,000/mo</span></div>
+                    <button type="submit" class="px-4 py-2 rounded bg-cyan-500 text-slate-900 font-semibold">Proceed to Payment</button>
+                </div>
+            </form>
+            <p class="text-xs text-slate-400 mt-3">By continuing you agree to our Terms. This demo page uses a placeholder checkout — integrate Stripe/PayMongo when going live.</p>
+        </div>
+    </div>
+
+    <script>
+        // Formspree endpoint (your ID)
+        const FORMSPREE_URL = 'https://formspree.io/f/xqaynjvq';
+
+        // Basic UI interactivity
+        const openBtns = document.querySelectorAll('.open-sub');
+        const modal = document.getElementById('signupModal');
+        const planLabel = document.getElementById('planLabel');
+        const planPrice = document.getElementById('planPrice');
+        const planInput = document.getElementById('planInput');
+
+        // HERO CTAs
+        const ctaPricing = document.getElementById('ctaPricing');
+        const ctaDemo = document.getElementById('ctaDemo');
+        function goToPricing() {
+            const target = document.getElementById('pricing');
+            if (!target) return;
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.replaceState(null, '', '#pricing');
+        }
+        if (ctaPricing) ctaPricing.addEventListener('click', goToPricing);
+        if (ctaDemo) ctaDemo.addEventListener('click', () => {
+            const target = document.getElementById('contact');
+            if (!target) return;
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.replaceState(null, '', '#contact');
+            setTimeout(() => document.getElementById('contactName').focus(), 300);
+        });
+
+        openBtns.forEach(b => b.addEventListener('click', () => {
+            const plan = b.dataset.plan || 'Basic';
+            const price = b.dataset.price || (plan === 'Professional' ? '50000' : '15000');
+            planLabel.textContent = plan;
+            planPrice.textContent = `₱${Number(price).toLocaleString()}/mo`;
+            planInput.value = plan;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }));
+
+        document.getElementById('closeModal').addEventListener('click', () => {
+            modal.classList.add('hidden'); modal.classList.remove('flex');
+        });
+
+        // Redirect "Get Started" buttons to the pricing section
+        const openSignup = document.getElementById('openSignup');
+        const openSignupMobile = document.getElementById('openSignupMobile');
+        if (openSignup) openSignup.addEventListener('click', goToPricing);
+        if (openSignupMobile) openSignupMobile.addEventListener('click', goToPricing);
+
+        // Helper: submit FormData to Formspree
+        async function submitToFormspree(formData, subject) {
+            formData.set('_subject', subject);
+            try {
+                const res = await fetch(FORMSPREE_URL, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (res.ok) return { ok: true };
+                const json = await res.json().catch(() => ({}));
+                return { ok: false, error: json.error || res.statusText || 'Submission failed' };
+            } catch (err) {
+                return { ok: false, error: err.message || 'Network error' };
+            }
+        }
+
+        // Contact + Demo handlers
+        const contactForm = document.getElementById('contactForm');
+        const contactSendBtn = document.getElementById('contactSendBtn');
+        const demoSendBtn = document.getElementById('demoSendBtn');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            contactSendBtn.disabled = true;
+            const fd = new FormData(contactForm);
+            const name = (fd.get('name') || '').trim();
+            const email = (fd.get('email') || '').trim();
+            if (!name || !email) {
+                alert('Please provide name and email.');
+                contactSendBtn.disabled = false;
+                return;
+            }
+            const res = await submitToFormspree(fd, 'Contact form submission');
+            contactSendBtn.disabled = false;
+            if (res.ok) {
+                alert('Thanks — we received your message.');
+                contactForm.reset();
+            } else {
+                alert('Send failed: ' + (res.error || 'unknown error'));
+            }
+        });
+
+        demoSendBtn.addEventListener('click', async () => {
+            demoSendBtn.disabled = true;
+            const fd = new FormData(contactForm);
+            // Ensure there's a message for demo requests
+            if (!fd.get('message')) fd.set('message', 'Requesting demo — please contact me.');
+            const res = await submitToFormspree(fd, 'Demo request');
+            demoSendBtn.disabled = false;
+            if (res.ok) {
+                alert('Demo request sent. We will contact you shortly.');
+                contactForm.reset();
+            } else {
+                alert('Send failed: ' + (res.error || 'unknown error'));
+            }
+        });
+
+        // Billing toggle (monthly/yearly) with simple price update
+        const billingToggle = document.getElementById('billingToggle');
+        billingToggle.addEventListener('change', () => {
+            const yearly = billingToggle.checked;
+            document.querySelectorAll('.price').forEach(el => {
+                const text = el.textContent.replace(/\s|,|₱|\/mo|\/yr/g, '');
+                const base = Number(text) || 0;
+                if (yearly) {
+                    const yearlyPrice = Math.round(base * 12 * 0.85);
+                    el.innerHTML = `₱${yearlyPrice.toLocaleString()}<span class="text-sm">/yr</span>`;
+                } else {
+                    if (el.innerText.includes('15')) el.innerHTML = '₱15,000<span class="text-sm">/mo</span>';
+                    if (el.innerText.includes('50')) el.innerHTML = '₱50,000<span class="text-sm">/mo</span>';
+                }
+            });
+        });
+
+        // Subscribe modal remains demo-only for now
+        document.getElementById('subscribeForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Keep existing behavior, then redirect to your PayPal sandbox link
+            alert('Subscription request received — this demo page simulates signup. Integrate a payment gateway for live billing.');
+            modal.classList.add('hidden'); modal.classList.remove('flex');
+
+            // Redirect to sandbox PayPal page
+            window.location.href = 'https://www.sandbox.paypal.com/ncp/payment/6PWSZRCML6NUU';
+        });
+    </script>
+</body>
+</html>
