@@ -22,6 +22,24 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* Preview thumbnail styling */
+        .preview-thumb {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-overlay {
+            transition: background-color .15s ease, transform .12s ease;
+        }
+
+        #previewCard:focus .preview-overlay,
+        #previewCard:hover .preview-overlay {
+            background-color: rgba(0,0,0,0.28);
+            transform: scale(1.01);
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100">
@@ -38,7 +56,7 @@
             <a href="#features" class="hover:text-white">Features</a>
             <a href="#pricing" class="hover:text-white">Pricing</a>
             <a href="#how" class="hover:text-white">How it works</a>
-            <a href="#contact" class="hover:text-white">Contact</a>
+            <a href="#contact" class="hover:text-white">Contact Us</a>
             <button id="openSignup" class="ml-4 px-4 py-2 rounded-lg bg-cyan-500 text-slate-900 font-semibold">Get Started</button>
         </nav>
 
@@ -57,7 +75,7 @@
 
                 <div class="mt-6 flex flex-wrap gap-3">
                     <button id="ctaPricing" class="px-5 py-3 rounded-lg bg-gradient-to-r from-cyan-400 to-indigo-600 text-slate-900 font-semibold">View Plans</button>
-                    <button id="ctaDemo" class="px-5 py-3 rounded-lg border border-slate-700 text-slate-200">Request Demo</button>
+                    <button id="ctaDemo" class="px-5 py-3 rounded-lg border border-slate-700 text-slate-200">Watch Demo</button>
                 </div>
 
                 <ul class="mt-8 grid grid-cols-2 gap-3 text-slate-300 text-sm max-w-md">
@@ -68,16 +86,23 @@
                 </ul>
             </div>
 
-            <div class="rounded-lg overflow-hidden shadow-2xl">
+            <!-- FULL BOX → VIDEO: other inside content removed; whole card is a single video preview control -->
+            <button type="button" id="previewCard" data-video="RZrRclF5pwU" aria-label="Open sample deliverables video" class="rounded-lg overflow-hidden shadow-2xl w-full text-left focus:outline-none focus:ring-2 focus:ring-cyan-400">
                 <div class="bg-slate-800 p-6">
-                    <div class="h-64 rounded-md bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-slate-400"></div>
-                    <div class="mt-4 grid grid-cols-3 gap-3 text-xs text-slate-300">
-                        <div class="p-3 glass rounded">Orthomosaic</div>
-                        <div class="p-3 glass rounded">DSM/DEM</div>
-                        <div class="p-3 glass rounded">Cut/Fill</div>
+                    <div class="h-64 rounded-md bg-black flex items-center justify-center text-slate-400 relative overflow-hidden">
+                        <!-- Thumbnail (set by script). Use <img> for better performance / responsiveness -->
+                        <img id="previewThumb" class="preview-thumb" src="" alt="Video preview thumbnail" loading="lazy" />
+                        <!-- dark overlay & play -->
+                        <div class="absolute inset-0 preview-overlay bg-black/22"></div>
+
+                        <svg class="w-12 h-12 text-slate-200 absolute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10z"></path>
+                            <path d="M10 8l6 4-6 4V8z"></path>
+                        </svg>
+                        <span class="absolute -bottom-3 text-xs text-slate-400">Watch demo</span>
                     </div>
                 </div>
-            </div>
+            </button>
         </section>
 
         <!-- FEATURES -->
@@ -122,26 +147,23 @@
             </div>
         </section>
 
-        <!-- PRICING -->
+        <!-- PRICING (updated to per-survey pricing) -->
         <section id="pricing" class="py-12">
             <h3 class="text-2xl font-bold">Subscription plans</h3>
-            <p class="text-slate-400 mt-2">Choose a plan that fits your project's scale. Prices in PHP. Monthly pricing shown — toggle to view yearly.</p>
+            <p class="text-slate-400 mt-2">Choose a plan that fits your project's scale. Prices in PHP. Pricing shown is per survey.</p>
 
-            <div class="mt-6 flex items-center gap-3">
-                <label class="text-sm text-slate-300">Monthly</label>
-                <input id="billingToggle" type="checkbox" class="toggle-checkbox" />
-                <label class="text-sm text-slate-300">Yearly (save 15%)</label>
+            <div class="mt-6">
+                <span class="text-sm text-slate-300">Per survey pricing</span>
             </div>
 
             <div class="mt-6 grid md:grid-cols-3 gap-6">
-                <!-- Free/Starter could be added here -->
                 <div class="p-6 rounded-lg glass flex flex-col">
                     <h4 class="font-semibold">Basic</h4>
                     <div class="text-slate-400 text-sm mt-2">For small projects and one-off surveys</div>
                     <div class="mt-6">
-                        <div class="text-3xl font-bold price">₱15,000<span class="text-sm">/mo</span></div>
+                        <div class="text-3xl font-bold price">₱15,000<span class="text-sm"> /Survey</span></div>
                         <ul class="mt-4 text-slate-300 text-sm space-y-2">
-                            <li>• Limited flight hours</li>
+                            <li>• Up to 300 acres</li>
                             <li>• 50 GB storage</li>
                             <li>• Standard processing</li>
                             <li>• Email support</li>
@@ -154,8 +176,12 @@
                     <h4 class="font-semibold">Professional</h4>
                     <div class="text-slate-800 text-sm mt-2">For engineering teams and enterprise workflows</div>
                     <div class="mt-6">
-                        <div class="text-3xl font-bold price">₱50,000<span class="text-sm">/mo</span></div>
+                        <div class="text-3xl font-bold price">₱50,000<span class="text-sm"> /Survey</span></div>
                         <ul class="mt-4 text-slate-900 text-sm space-y-2">
+                            <li>• Up to 1,000 acres</li>
+                            <li>• 200 GB storage</li>
+                            <li>• High-priority processing</li>
+                            <li>• Phone & email support</li>
                             <li>• Priority scheduling</li>
                             <li>• Unlimited data access</li>
                             <li>• API integrations</li>
@@ -181,7 +207,7 @@
             </div>
         </section>
 
-        <!-- FAQ / Trust -->
+        <!-- rest unchanged (FAQ, contact, footer) -->
         <section class="py-12">
             <h3 class="text-2xl font-bold">Trusted by engineering teams</h3>
             <p class="text-slate-400 mt-2 max-w-2xl">Local governments, construction firms, and survey companies rely on SkyMetric for repeatable, auditable survey data.</p>
@@ -193,9 +219,8 @@
             </div>
         </section>
 
-        <!-- CONTACT -->
         <section id="contact" class="py-12">
-            <h3 class="text-2xl font-bold">Contact & Demo</h3>
+            <h3 class="text-2xl font-bold"> Contact Us </h3>
             <div class="mt-6 grid md:grid-cols-2 gap-6">
                 <form id="contactForm" class="p-6 rounded-lg glass" novalidate>
                     <label class="block text-sm text-slate-300">Name</label>
@@ -209,7 +234,7 @@
 
                     <div class="mt-4 flex gap-3">
                         <button type="submit" id="contactSendBtn" class="px-4 py-2 rounded bg-cyan-500 text-slate-900 font-semibold">Send</button>
-                        <button type="button" id="demoSendBtn" class="px-4 py-2 rounded border border-slate-600 text-slate-200">Request Demo</button>
+
                     </div>
                 </form>
 
@@ -230,7 +255,7 @@
         <footer class="py-8 text-slate-400 text-sm text-center">© SkyMetric Technologies, Inc. — Built for engineers. Privacy · Terms</footer>
     </main>
 
-    <!-- SIGNUP / SUBSCRIPTION MODAL -->
+    <!-- SIGNUP / SUBSCRIPTION MODAL (unchanged structure; price label updated) -->
     <div id="signupModal" class="fixed inset-0 hidden items-center justify-center bg-black/60 p-6 z-50">
         <div class="w-full max-w-xl bg-slate-800 rounded-lg p-6">
             <div class="flex items-center justify-between">
@@ -253,12 +278,66 @@
                         <input name="phone" class="w-full p-2 rounded bg-slate-900 text-slate-100" />
                     </label>
                 </div>
+
+                <label class="text-sm text-slate-300">Estimated area (acres)</label>
+                <input id="areaInput" name="area" type="number" min="0" step="0.1" class="w-full p-2 rounded bg-slate-900 text-slate-100" placeholder="e.g. 12.5" />
+                <div id="areaHint" class="text-xs text-amber-300"></div>
+
+                <!-- Payment method selection -->
+                <div class="mt-3">
+                    <div class="text-sm text-slate-300">Payment method</div>
+                    <div class="mt-2 grid grid-cols-2 gap-3 text-slate-200">
+                        <!-- E-wallets -->
+                        <label class="flex items-center gap-2 p-3 rounded border border-slate-700 hover:border-slate-500 cursor-pointer">
+                            <input type="radio" name="paymentMethod" value="gcash" checked />
+                            <span>GCash</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-3 rounded border border-slate-700 hover:border-slate-500 cursor-pointer">
+                            <input type="radio" name="paymentMethod" value="maya" />
+                            <span>Maya (PayMaya)</span>
+                        </label>
+
+                        <!-- Online Banking -->
+                        <label class="flex items-center gap-2 p-3 rounded border border-slate-700 hover:border-slate-500 cursor-pointer">
+                            <input type="radio" name="paymentMethod" value="bpi" />
+                            <span>BPI Online</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-3 rounded border border-slate-700 hover:border-slate-500 cursor-pointer">
+                            <input type="radio" name="paymentMethod" value="unionbank" />
+                            <span>UnionBank Online</span>
+                        </label>
+
+                        <!-- Cards & International -->
+                        <label class="flex items-center gap-2 p-3 rounded border border-slate-700 hover:border-slate-500 cursor-pointer">
+                            <input type="radio" name="paymentMethod" value="cards" />
+                            <span>Credit/Debit Card</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-3 rounded border border-slate-700 hover:border-slate-500 cursor-pointer">
+                            <input type="radio" name="paymentMethod" value="paypal" />
+                            <span>PayPal</span>
+                        </label>
+                    </div>
+
+                    <!-- Payment instructions -->
+                    <div id="bankInstructions" class="mt-3 p-3 text-sm text-slate-300 bg-slate-700/50 rounded hidden"></div>
+                </div>
+
                 <div class="flex items-center justify-between">
-                    <div class="text-sm text-slate-400">Plan: <span id="planLabel">Basic</span> — <span id="planPrice">₱15,000/mo</span></div>
+                    <div class="text-sm text-slate-400">Plan: <span id="planLabel">Basic</span> — <span id="planPrice">₱15,000 per survey</span></div>
                     <button type="submit" class="px-4 py-2 rounded bg-cyan-500 text-slate-900 font-semibold">Proceed to Payment</button>
                 </div>
             </form>
             <p class="text-xs text-slate-400 mt-3">By continuing you agree to our Terms. This demo page uses a placeholder checkout — integrate Stripe/PayMongo when going live.</p>
+        </div>
+    </div>
+
+    <!-- VIDEO LIGHTBOX MODAL -->
+    <div id="videoModal" class="fixed inset-0 hidden items-center justify-center bg-black/70 p-4" style="z-index:9999;">
+        <div class="relative w-full max-w-3xl">
+            <button id="closeVideoModal" class="absolute right-0 top-0 m-2 text-slate-200 bg-slate-800/60 rounded px-3 py-1 hover:bg-slate-800">✕</button>
+            <div style="position:relative;padding-top:56.25%;background:#000;border-radius:8px;overflow:hidden;">
+                <iframe id="videoFrame" src="" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0;" allow="autoplay; encrypted-media" allowfullscreen title="SkyMetric demo video"></iframe>
+            </div>
         </div>
     </div>
 
@@ -273,6 +352,17 @@
         const planPrice = document.getElementById('planPrice');
         const planInput = document.getElementById('planInput');
 
+        // New elements for area + hint
+        const areaInput = document.getElementById('areaInput');
+        const areaHint = document.getElementById('areaHint');
+
+        // Video modal elements
+        const previewCard = document.getElementById('previewCard');
+        const previewThumb = document.getElementById('previewThumb');
+        const videoModal = document.getElementById('videoModal');
+        const videoFrame = document.getElementById('videoFrame');
+        const closeVideoModalBtn = document.getElementById('closeVideoModal');
+
         // HERO CTAs
         const ctaPricing = document.getElementById('ctaPricing');
         const ctaDemo = document.getElementById('ctaDemo');
@@ -284,19 +374,101 @@
         }
         if (ctaPricing) ctaPricing.addEventListener('click', goToPricing);
         if (ctaDemo) ctaDemo.addEventListener('click', () => {
-            const target = document.getElementById('contact');
-            if (!target) return;
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            history.replaceState(null, '', '#contact');
-            setTimeout(() => document.getElementById('contactName').focus(), 300);
+            const videoId = (previewCard && previewCard.dataset && previewCard.dataset.video) ? previewCard.dataset.video : 'RZrRclF5pwU';
+            openVideoModal(videoId);
         });
 
+        // Set preview thumbnail for the preview card (with fallback)
+        (function initPreviewThumbnail() {
+            if (!previewCard || !previewThumb) return;
+            const videoId = previewCard.dataset.video;
+            if (!videoId) return;
+
+            const maxres = `https://img.youtube.com/vi/${encodeURIComponent(videoId)}/maxresdefault.jpg`;
+            const hq = `https://img.youtube.com/vi/${encodeURIComponent(videoId)}/hqdefault.jpg`;
+
+            previewThumb.src = maxres;
+            previewThumb.onerror = () => {
+                if (!previewThumb.dataset.fallback) {
+                    previewThumb.dataset.fallback = '1';
+                    previewThumb.src = hq;
+                }
+            };
+            previewThumb.alt = 'Video preview — click to play';
+        })();
+
+        // Wire preview card to open the video lightbox
+        if (previewCard) {
+            previewCard.addEventListener('click', () => {
+                const videoId = previewCard.dataset.video;
+                openVideoModal(videoId);
+            });
+            previewCard.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const videoId = previewCard.dataset.video;
+                    openVideoModal(videoId);
+                }
+            });
+        }
+
+        function openVideoModal(videoId) {
+            if (!videoId) return;
+            let id = videoId;
+            try {
+                if (videoId.startsWith('http')) {
+                    const url = new URL(videoId);
+                    if (url.hostname.includes('youtu.be')) {
+                        id = url.pathname.slice(1);
+                    } else if (url.hostname.includes('youtube.com')) {
+                        id = url.searchParams.get('v') || id;
+                    }
+                }
+            } catch (err) {
+                // ignore
+            }
+
+            videoFrame.src = `https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0`;
+            videoModal.classList.remove('hidden');
+            videoModal.classList.add('flex');
+            closeVideoModalBtn.focus();
+            document.addEventListener('keydown', escCloseHandler);
+        }
+
+        function closeVideoModal() {
+            videoFrame.src = '';
+            videoModal.classList.add('hidden');
+            videoModal.classList.remove('flex');
+            document.removeEventListener('keydown', escCloseHandler);
+        }
+
+        function escCloseHandler(e) {
+            if (e.key === 'Escape') closeVideoModal();
+        }
+
+        closeVideoModalBtn.addEventListener('click', closeVideoModal);
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) closeVideoModal();
+        });
+
+        // Open subscription modal (sets plan label & per-survey price)
         openBtns.forEach(b => b.addEventListener('click', () => {
             const plan = b.dataset.plan || 'Basic';
             const price = b.dataset.price || (plan === 'Professional' ? '50000' : '15000');
             planLabel.textContent = plan;
-            planPrice.textContent = `₱${Number(price).toLocaleString()}/mo`;
+            planPrice.textContent = `₱${Number(price).toLocaleString()} per survey`;
             planInput.value = plan;
+
+            if (areaInput) {
+                areaInput.value = '';
+                areaInput.removeAttribute('max');
+                areaHint.textContent = '';
+                if (plan === 'Basic') {
+                    areaInput.setAttribute('max', '300');
+                    areaHint.textContent = 'Note: Basic plan is limited to 300 acres maximum.';
+                }
+            }
+
             modal.classList.remove('hidden');
             modal.classList.add('flex');
         }));
@@ -328,10 +500,9 @@
             }
         }
 
-        // Contact + Demo handlers
+        // Contact handlers
         const contactForm = document.getElementById('contactForm');
         const contactSendBtn = document.getElementById('contactSendBtn');
-        const demoSendBtn = document.getElementById('demoSendBtn');
 
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -354,47 +525,111 @@
             }
         });
 
-        demoSendBtn.addEventListener('click', async () => {
-            demoSendBtn.disabled = true;
-            const fd = new FormData(contactForm);
-            // Ensure there's a message for demo requests
-            if (!fd.get('message')) fd.set('message', 'Requesting demo — please contact me.');
-            const res = await submitToFormspree(fd, 'Demo request');
-            demoSendBtn.disabled = false;
-            if (res.ok) {
-                alert('Demo request sent. We will contact you shortly.');
-                contactForm.reset();
-            } else {
-                alert('Send failed: ' + (res.error || 'unknown error'));
-            }
-        });
+        // Removed monthly/yearly toggle behaviour — pricing is now per survey.
 
-        // Billing toggle (monthly/yearly) with simple price update
-        const billingToggle = document.getElementById('billingToggle');
-        billingToggle.addEventListener('change', () => {
-            const yearly = billingToggle.checked;
-            document.querySelectorAll('.price').forEach(el => {
-                const text = el.textContent.replace(/\s|,|₱|\/mo|\/yr/g, '');
-                const base = Number(text) || 0;
-                if (yearly) {
-                    const yearlyPrice = Math.round(base * 12 * 0.85);
-                    el.innerHTML = `₱${yearlyPrice.toLocaleString()}<span class="text-sm">/yr</span>`;
-                } else {
-                    if (el.innerText.includes('15')) el.innerHTML = '₱15,000<span class="text-sm">/mo</span>';
-                    if (el.innerText.includes('50')) el.innerHTML = '₱50,000<span class="text-sm">/mo</span>';
-                }
-            });
-        });
-
-        // Subscribe modal remains demo-only for now
+        // Subscribe form validation + payment routing (per-survey pricing)
         document.getElementById('subscribeForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            // Keep existing behavior, then redirect to your PayPal sandbox link
-            alert('Subscription request received — this demo page simulates signup. Integrate a payment gateway for live billing.');
-            modal.classList.add('hidden'); modal.classList.remove('flex');
 
-            // Redirect to sandbox PayPal page
-            window.location.href = 'https://www.sandbox.paypal.com/ncp/payment/6PWSZRCML6NUU';
+            const fd = new FormData(document.getElementById('subscribeForm'));
+            const selectedPlan = (planInput.value || '').trim() || fd.get('plan') || 'Basic';
+            const areaVal = areaInput ? areaInput.value : '';
+            const areaNum = areaVal ? Number(areaVal) : NaN;
+            const paymentMethod = (fd.get('paymentMethod') || 'paypal');
+
+            if (selectedPlan === 'Basic') {
+                if (!areaVal) {
+                    alert('Please provide estimated area in acres for the Basic plan (max 300 acres).');
+                    return;
+                }
+                if (isNaN(areaNum) || areaNum < 0) {
+                    alert('Please enter a valid area value.');
+                    return;
+                }
+                if (areaNum > 300) {
+                    alert('Basic plan is limited to 300 acres. Please choose Professional or Enterprise for larger areas.');
+                    return;
+                }
+            }
+
+            // compute amount based on plan (per survey)
+            let base = (selectedPlan === 'Professional') ? 50000 : 15000;
+            const amount = base; // per survey price in PHP
+
+            // Branch by payment method
+            if (paymentMethod === 'paypal') {
+                // Plan-specific PayPal sandbox checkout URLs
+                const basicPaypal = 'https://sandbox.paypal.com/ncp/payment/WLXY644S69DFY';
+                const professionalPaypal = 'https://sandbox.paypal.com/ncp/payment/2C4KM7KB7G5VJ';
+                const baseUrl = (selectedPlan === 'Professional') ? professionalPaypal : basicPaypal;
+                const payUrl = `${baseUrl}?amount=${encodeURIComponent(amount)}&plan=${encodeURIComponent(selectedPlan)}`;
+                modal.classList.add('hidden'); modal.classList.remove('flex');
+                window.location.href = payUrl;
+                return;
+            }
+
+            if (paymentMethod === 'stripe') {
+                const stripeCheckout = `https://example.com/stripe-checkout?amount=${encodeURIComponent(amount)}&plan=${encodeURIComponent(selectedPlan)}`;
+                modal.classList.add('hidden'); modal.classList.remove('flex');
+                window.location.href = stripeCheckout;
+                return;
+            }
+
+            if (paymentMethod === 'bank') {
+                alert(`Bank transfer selected.\n\nAmount: ₱${amount.toLocaleString()}\nTransfer to: SkyMetric Technologies — BPI 123-456-789\nInclude your name and plan (${selectedPlan}).\nWe will email an invoice and confirm receipt.`);
+                return;
+            }
+
+            if (paymentMethod === 'gcash' || paymentMethod === 'maya') {
+                alert(`Please send payment to ${paymentMethod.toUpperCase()}: 09951390922\nAmount: ₱${amount.toLocaleString()}\nInclude your name and plan (${selectedPlan}) in the notes.`);
+                return;
+            }
+
+            if (paymentMethod === 'bpi' || paymentMethod === 'unionbank') {
+                const accountNo = paymentMethod === 'bpi' ? '1234-5678-90' : '1234-5678-9012';
+                alert(`Please transfer to ${paymentMethod.toUpperCase()}: ${accountNo}\nAmount: ₱${amount.toLocaleString()}\nEmail proof of payment to support@skymetric.ph`);
+                return;
+            }
+
+            if (paymentMethod === 'cards') {
+                window.location.href = `https://example.com/card-payment?amount=${amount}&plan=${selectedPlan}`;
+                return;
+            }
+
+            // fallback
+            alert('Subscription request received — integrate a payment gateway for live billing.');
+            modal.classList.add('hidden'); modal.classList.remove('flex');
+            // Default to Basic plan PayPal sandbox URL as last-resort redirect
+            window.location.href = 'https://sandbox.paypal.com/ncp/payment/WLXY644S69DFY';
+        });
+
+        // Update the payment handler script
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(r => {
+            r.addEventListener('change', () => {
+                const method = document.querySelector('input[name="paymentMethod"]:checked').value;
+                const instructions = document.getElementById('bankInstructions');
+
+                switch (method) {
+                    case 'gcash':
+                        instructions.innerHTML = 'Send to GCash: 09123456789 (SkyMetric Technologies)<br>Please include your name & plan in the notes.';
+                        instructions.classList.remove('hidden');
+                        break;
+                    case 'maya':
+                        instructions.innerHTML = 'Send to Maya: 09123456789 (SkyMetric Technologies)<br>Please include your name & plan in the notes.';
+                        instructions.classList.remove('hidden');
+                        break;
+                    case 'bpi':
+                        instructions.innerHTML = 'BPI Account: 1234-5678-90 (SkyMetric Technologies)<br>After transfer, please email your proof of payment to support@skymetric.ph';
+                        instructions.classList.remove('hidden');
+                        break;
+                    case 'unionbank':
+                        instructions.innerHTML = 'UnionBank Account: 1234-5678-9012 (SkyMetric Technologies)<br>After transfer, please email your proof of payment to support@skymetric.ph';
+                        instructions.classList.remove('hidden');
+                        break;
+                    default:
+                        instructions.classList.add('hidden');
+                }
+            });
         });
     </script>
 </body>
